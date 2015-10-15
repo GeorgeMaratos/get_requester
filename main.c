@@ -48,7 +48,6 @@ int main(int argc, char **argv) {  //argv[1] is the site to request from
     printf("send failed\n");
     return 1;
   }
-  printf("Waiting for result\n");
   recv(sock, buffer, BUF_SIZE, 0);
   for(i=0;i<BUF_SIZE;i++) {
     fprintf(f,"%c", buffer[i]);
