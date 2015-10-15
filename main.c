@@ -27,7 +27,6 @@ int main(int argc, char **argv) {  //argv[1] is the site to request from
     i++;
   }
   sprintf(get_request,"GET %s HTTP/1.0\r\nHost: %s\r\n\r\n", page, host);
-  printf("get_request: %s\n", get_request);
   hints = &hint;
   hint.ai_family = AF_UNSPEC;
   hint.ai_socktype = SOCK_STREAM;
