@@ -5,7 +5,7 @@
 #include <netdb.h>
 
 #define REQ_SIZE 150
-#define URL_SIZE 20
+#define URL_SIZE 40
 #define BUF_SIZE 1000000
 #define PORT "80"
 
@@ -26,7 +26,8 @@ int main(int argc, char **argv) {  //argv[1] is the site to request from
     j++;
     i++;
   }
-  sprintf(get_request,"GET %s HTTP/1.0\r\nHost: %s\r\n\r\n", page, url);
+  sprintf(get_request,"GET %s HTTP/1.0\r\nHost: %s\r\n\r\n", page, host);
+  printf("get_request: %s\n", get_request);
   hints = &hint;
   hint.ai_family = AF_UNSPEC;
   hint.ai_socktype = SOCK_STREAM;
@@ -36,7 +37,7 @@ int main(int argc, char **argv) {  //argv[1] is the site to request from
     return 1;
   }
   if((sock = socket(results->ai_family, results->ai_socktype,
-	 results->ai_protocol))) {
+	 results->ai_protocol)) < 0) {
     printf("socket failed\n");
     return 1;
   }
@@ -54,5 +55,6 @@ int main(int argc, char **argv) {  //argv[1] is the site to request from
     fprintf(f,"%c", buffer[i]);
   }
   freeaddrinfo(results);
+  fclose(f);
   return 0;
 }
